@@ -17,6 +17,11 @@
         dest: ./downloads/openshift-client-linux.tar.gz
         url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/openshift-client-linux.tar.gz"
 
+    - name: Download oc-mirror.tar.gz
+      get_url:
+        dest: ./downloads/oc-mirror.tar.gz
+        url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/oc-mirror.tar.gz"
+
     - name: Download rhcos-live.x86_64.iso
       get_url:
         dest: ./downloads/rhcos-live.x86_64.iso
