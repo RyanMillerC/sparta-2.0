@@ -4,7 +4,7 @@
     * [x] openshift-install
     * [x] oc client
     * [x] oc-mirror
-    * [ ] <s>quay standalone</s>docker registry (will switch to quay later)
+    * [x] <s>quay standalone</s>docker registry (will switch to quay later)
     * [x] rhcos image
 * [ ] Spin up the quay container
 * [ ] mirror from rh to the local quay container via oc-mirror based on a oc-mirror config file
