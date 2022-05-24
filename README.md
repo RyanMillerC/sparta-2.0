@@ -2,7 +2,7 @@
 
 * [ ] Pull down
     * [x] openshift-install
-    * [ ] oc client
+    * [x] oc client
     * [ ] oc-mirror
     * [ ] <s>quay standalone</s>docker registry (will switch to quay later)
     * [x] rhcos image
