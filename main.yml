@@ -9,6 +9,7 @@
       loop:
         - ./downloads
         - ./extracted
+        - ./registry
 
     - name: Download required software from Red Hat
       get_url:
@@ -38,3 +39,11 @@
     - name: Pull docker registry image with podman
       podman_image:
         name: docker.io/registry:latest
+
+    - name: Start docker registry
+      containers.podman.podman_container:
+        name: registry
+        image: docker.io/registry:latest
+        state: started
+        expose: 5000
+        volume: "./registry:/var/lib/registry:z"
