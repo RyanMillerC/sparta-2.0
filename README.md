@@ -1,6 +1,6 @@
 # Sparta 2.0
 
-* [ ] Pull down
+* [x] Pull down
     * [x] openshift-install
     * [x] oc client
     * [x] oc-mirror
