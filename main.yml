@@ -24,10 +24,6 @@
         - dest: ./downloads/rhcos-live.x86_64.iso
           url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/rhcos-live.x86_64.iso"
 
-    - name: Pull docker registry image with podman
-      podman_image:
-        name: docker.io/registry:latest
-
     - name: Extract oc tools
       unarchive:
         # NOTE: unarchive module REQUIRES an absolute path for dest. It's not
@@ -38,3 +34,7 @@
       loop:
         - openshift-client-linux.tar.gz
         - oc-mirror.tar.gz
+
+    - name: Pull docker registry image with podman
+      podman_image:
+        name: docker.io/registry:latest
