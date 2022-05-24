@@ -7,7 +7,12 @@
         path: ./downloads
         state: directory
 
-    - name: Download openshift-install
+    - name: Download openshift-install-linux.tar.gz
       get_url:
         dest: ./downloads/openshift-install-linux.tar.gz
         url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux.tar.gz"
+
+    - name: Download rhcos-live.x86_64.iso
+      get_url:
+        dest: ./downloads/rhcos-live.x86_64.iso
+        url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/rhcos-live.x86_64.iso"
