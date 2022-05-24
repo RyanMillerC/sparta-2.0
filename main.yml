@@ -1,0 +1,13 @@
+- name: "Sparta 2.0"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create ./downloads directory
+      file:
+        path: ./downloads
+        state: directory
+
+    - name: Download openshift-install
+      get_url:
+        dest: ./downloads/openshift-install-linux.tar.gz
+        url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux.tar.gz"
