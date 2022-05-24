@@ -24,15 +24,9 @@
         - dest: ./downloads/rhcos-live.x86_64.iso
           url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/rhcos-live.x86_64.iso"
 
-    - name: Stat docker-registry image tarball
-      stat:
-        path: ./downloads/docker-registry-image-latest.tar.gz
-      register: docker_registry_image
-
-    - name: Download docker-registry image tarball
-      command:
-        cmd: "skopeo copy docker://docker.io/registry:latest docker-archive:./downloads/docker-registry-image-latest.tar.gz"
-      when: "not docker_registry_image.stat.exists"
+    - name: Pull docker registry image with podman
+      podman_image:
+        name: docker.io/registry:latest
 
     - name: Extract oc tools
       unarchive:
