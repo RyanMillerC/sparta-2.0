@@ -10,25 +10,19 @@
         - ./downloads
         - ./extracted
 
-    - name: Download openshift-install-linux.tar.gz
+    - name: Download required software from Red Hat
       get_url:
-        dest: ./downloads/openshift-install-linux.tar.gz
-        url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux.tar.gz"
-
-    - name: Download openshift-client-linux.tar.gz
-      get_url:
-        dest: ./downloads/openshift-client-linux.tar.gz
-        url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/openshift-client-linux.tar.gz"
-
-    - name: Download oc-mirror.tar.gz
-      get_url:
-        dest: ./downloads/oc-mirror.tar.gz
-        url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/oc-mirror.tar.gz"
-
-    - name: Download rhcos-live.x86_64.iso
-      get_url:
-        dest: ./downloads/rhcos-live.x86_64.iso
-        url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/rhcos-live.x86_64.iso"
+        dest: "{{ item.dest }}"
+        url: "{{ item.url }}"
+      loop:
+        - dest: ./downloads/openshift-install-linux.tar.gz
+          url: "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux.tar.gz"
+        - dest: ./downloads/openshift-client-linux.tar.gz
+          url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/openshift-client-linux.tar.gz"
+        - dest: ./downloads/oc-mirror.tar.gz
+          url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/oc-mirror.tar.gz"
+        - dest: ./downloads/rhcos-live.x86_64.iso
+          url: "https://mirror.openshift.com/pub/openshift-v4/x86_64/dependencies/rhcos/latest/rhcos-live.x86_64.iso"
 
     - name: Stat docker-registry image tarball
       stat:
@@ -43,7 +37,7 @@
     - name: Extract oc tools
       unarchive:
         # NOTE: unarchive module REQUIRES an absolute path for dest. It's not
-        # documented but I couldn't get src working with a relative path.
+        # documented but I couldn't get src working with a relative path either.
         src: "{{ playbook_dir}}/downloads/{{ item }}"
         dest: "{{ playbook_dir }}/extracted"
         remote_src: yes
