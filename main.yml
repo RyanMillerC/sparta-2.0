@@ -2,10 +2,13 @@
   hosts: localhost
   connection: local
   tasks:
-    - name: Create ./downloads directory
+    - name: Create required directories
       file:
-        path: ./downloads
+        path: "{{ item }}"
         state: directory
+      loop:
+        - ./downloads
+        - ./extracted
 
     - name: Download openshift-install-linux.tar.gz
       get_url:
@@ -36,3 +39,14 @@
       command:
         cmd: "skopeo copy docker://docker.io/registry:latest docker-archive:./downloads/docker-registry-image-latest.tar.gz"
       when: "not docker_registry_image.stat.exists"
+
+    - name: Extract oc tools
+      unarchive:
+        # NOTE: unarchive module REQUIRES an absolute path for dest. It's not
+        # documented but I couldn't get src working with a relative path.
+        src: "{{ playbook_dir}}/downloads/{{ item }}"
+        dest: "{{ playbook_dir }}/extracted"
+        remote_src: yes
+      loop:
+        - openshift-client-linux.tar.gz
+        - oc-mirror.tar.gz
